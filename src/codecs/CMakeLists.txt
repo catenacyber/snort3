@@ -31,6 +31,8 @@ else()
     )
 endif(STATIC_CODECS)
 
+add_subdirectory(test)
+
 install (FILES ${CODEC_INCLUDES}
     DESTINATION "${INCLUDE_INSTALL_PATH}/codecs"
 )

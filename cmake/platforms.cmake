@@ -25,6 +25,7 @@ endif()
 include(CheckCCompilerFlag)
 include(CheckCXXCompilerFlag)
 
+if ( NOT DEFINED ENV{LIB_FUZZING_ENGINE} )
 CHECK_C_COMPILER_FLAG(-fvisibility=hidden HAS_C_HIDDEN)
 if (HAS_C_HIDDEN)
     set(EXTRA_C_FLAGS "${EXTRA_C_FLAGS} -fvisibility=hidden")
@@ -36,4 +37,4 @@ if (HAS_CXX_HIDDEN)
     set(EXTRA_CXX_FLAGS "${EXTRA_CXX_FLAGS} -fvisibility=hidden")
     set(HAVE_VISIBILITY 1)
 endif()
-
+endif( DEFINED ENV{LIB_FUZZING_ENGINE} )
