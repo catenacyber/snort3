@@ -22,11 +22,20 @@
 #endif
 
 #include "protocols/packet_manager.h"
+#include "main/snort.h"
 
 using namespace snort;
 
+extern "C" int LLVMFuzzerInitialize(int *argc, char ***argv) {
+    set_thread_type(STHREAD_TYPE_MAIN);
+    Snort::setup(*argc, *argv);
+    return 0;
+}
+
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     Packet p;
-    PacketManager::decode(&p, NULL, data, size, false, false);
+    DAQ_PktHdr_t pkth = { };
+    p.pkth = &pkth;
+    PacketManager::decode(&p, &pkth, data, size, false, false);
     return 0;
 }

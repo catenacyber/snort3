@@ -433,7 +433,7 @@ int32_t UriNormalizer::norm_path_clean(uint8_t* buf, const int32_t in_length,
             // Remove the previous directory from the output. "/foo/bar/../" becomes "/foo/"
             else
             {
-                for (length -= 3; length > 0 && buf[length-1] != '/'; length--);
+                for (length -= 3; buf[length-1] != '/'; length--);
             }
         }
         // Pass through an ordinary slash

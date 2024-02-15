@@ -136,10 +136,8 @@ add_subdirectory(connectors)
 
 # FIXIT-L Delegate building out the target objects list to subdirectories
 
-#  The main Snort executable
-add_executable( snort
-    main.h
-    main.cc
+
+set(SNORT_ALL_LIBRARIES
     $<TARGET_OBJECTS:codecs>
     $<TARGET_OBJECTS:connectors>
     $<TARGET_OBJECTS:control>
@@ -198,6 +196,18 @@ add_executable( snort
     ${STATIC_NETWORK_INSPECTOR_PLUGINS}
     ${STATIC_SERVICE_INSPECTOR_PLUGINS}
     ${STATIC_POLICY_SELECTOR_PLUGINS}
+)
+
+#TODO better add_fuzztest(packet_manager_decode_fuzz
+#    SOURCES main.h main.cc
+#    LIBS ${SNORT_ALL_LIBRARIES} ${EXTERNAL_LIBRARIES}
+#)
+
+#  The main Snort executable
+add_executable( snort
+    main.h
+    main.cc
+    ${SNORT_ALL_LIBRARIES}
     ${UNIT_TESTS_LIBRARIES}
 )
 
