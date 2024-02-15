@@ -42,3 +42,16 @@ add_cpputest( http_uri_norm_test
         ../http_tables.cc
         ../../../framework/module.cc
 )
+
+add_fuzztest( http_uri_norm_fuzz
+    SOURCES
+        ../http_uri_norm.cc
+        ../http_module.cc
+        ../http_test_manager.cc
+        ../http_test_input.cc
+        ../http_normalizers.cc
+        ../http_str_to_code.cc
+        ../http_field.cc
+        ../http_tables.cc
+        ../../../framework/module.cc
+)
