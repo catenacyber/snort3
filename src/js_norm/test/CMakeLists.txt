@@ -66,6 +66,12 @@ add_catch_test( pdf_tokenizer_test
         js_test_stubs.cc
 )
 
+add_fuzztest( pdf_tokenizer_fuzz
+    SOURCES
+        ${pdf_tokenizer_OUTPUTS}
+        js_test_stubs.cc
+)
+
 if (ENABLE_BENCHMARK_TESTS)
 
     add_catch_test( js_norm_benchmark
