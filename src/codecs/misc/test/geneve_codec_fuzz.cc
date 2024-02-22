@@ -41,7 +41,7 @@ namespace snort
     bool SnortConfig::tunnel_bypass_enabled(unsigned short) const { return false; }
     const SnortConfig* SnortConfig::get_conf() { return NULL; }
     uint16_t ip::IpApi::dgram_len() const { return 0; }
-    static const char* PacketManager::get_proto_name(IpProtocol) { return "dummy"; }
+    const char* PacketManager::get_proto_name(IpProtocol) { return "dummy"; }
 }
 
 using namespace snort;
