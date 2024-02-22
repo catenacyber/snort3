@@ -66,6 +66,23 @@ extern const BaseApi* cd_llc[];
 extern const BaseApi* cd_teredo[];
 extern const BaseApi* cd_vxlan[];
 
+extern const BaseApi* cd_ah[];
+extern const BaseApi* cd_dstopts[];
+extern const BaseApi* cd_esp[];
+extern const BaseApi* cd_frag[];
+extern const BaseApi* cd_gre[];
+extern const BaseApi* cd_hopopts[];
+extern const BaseApi* cd_icmp4[];
+extern const BaseApi* cd_icmp6[];
+extern const BaseApi* cd_igmp[];
+extern const BaseApi* cd_ipv4[];
+extern const BaseApi* cd_ipv6[];
+extern const BaseApi* cd_mobility[];
+extern const BaseApi* cd_pgm[];
+extern const BaseApi* cd_routing[];
+extern const BaseApi* cd_tcp[];
+extern const BaseApi* cd_udp[];
+
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     if (fuzz_init == 0) {
         load_proto((const CodecApi*)cd_geneve[0]);
@@ -75,6 +92,23 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
         load_proto((const CodecApi*)cd_llc[0]);
         load_proto((const CodecApi*)cd_teredo[0]);
         load_proto((const CodecApi*)cd_vxlan[0]);
+
+        load_proto((const CodecApi*)cd_ah[0]);
+        load_proto((const CodecApi*)cd_dstopts[0]);
+        load_proto((const CodecApi*)cd_esp[0]);
+        load_proto((const CodecApi*)cd_frag[0]);
+        load_proto((const CodecApi*)cd_gre[0]);
+        load_proto((const CodecApi*)cd_hopopts[0]);
+        load_proto((const CodecApi*)cd_icmp4[0]);
+        load_proto((const CodecApi*)cd_icmp6[0]);
+        load_proto((const CodecApi*)cd_igmp[0]);
+        load_proto((const CodecApi*)cd_ipv4[0]);
+        load_proto((const CodecApi*)cd_ipv6[0]);
+        load_proto((const CodecApi*)cd_mobility[0]);
+        load_proto((const CodecApi*)cd_pgm[0]);
+        load_proto((const CodecApi*)cd_routing[0]);
+        load_proto((const CodecApi*)cd_tcp[0]);
+        load_proto((const CodecApi*)cd_udp[0]);
         fuzz_init = 1;
     }
     if (size < 2) {

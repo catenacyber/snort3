@@ -13,4 +13,20 @@ add_fuzztest(geneve_codec_fuzz
         ../cd_llc.cc
         ../cd_teredo.cc
         ../cd_vxlan.cc
+        ../../ip/cd_auth.cc
+        ../../ip/cd_dst_opts.cc
+        ../../ip/cd_esp.cc
+        ../../ip/cd_frag.cc
+        ../../ip/cd_gre.cc
+        ../../ip/cd_hop_opts.cc
+        ../../ip/cd_icmp4.cc
+        ../../ip/cd_icmp6.cc
+        ../../ip/cd_igmp.cc
+        ../../ip/cd_ipv4.cc
+        ../../ip/cd_ipv6.cc
+        ../../ip/cd_mobility.cc
+        ../../ip/cd_pgm.cc
+        ../../ip/cd_routing.cc
+        ../../ip/cd_tcp.cc
+        ../../ip/cd_udp.cc
 )
