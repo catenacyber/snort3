@@ -72,15 +72,20 @@ bool TeredoCodec::decode(const RawData& raw, CodecData& codec, DecodeData& snort
         codec.lyr_len = (teredo::INDICATOR_AUTH_MIN_LEN + client_id_length + auth_data_length);
     }
 
+    if ( raw.len < codec.lyr_len + 2 )
+        return false;
+    // should it have been else if (ie if not teredo::INDICATOR_AUTH) ?
     if ( ntohs(*(const uint16_t*)raw_pkt) == teredo::INDICATOR_ORIGIN )
     {
-        if ( raw.len < teredo::INDICATOR_ORIGIN_LEN )
+        if ( raw.len < codec.lyr_len + teredo::INDICATOR_ORIGIN_LEN )
             return false;
 
         raw_pkt += teredo::INDICATOR_ORIGIN_LEN;
         codec.lyr_len += teredo::INDICATOR_ORIGIN_LEN;
     }
 
+    if ( raw.len < codec.lyr_len + 1 )
+        return false;
     /* If this is an IPv6 datagram, the first 4 bits will be the number 6. */
     if ( ((*raw_pkt & 0xF0) >> 4) == 6 )
     {
