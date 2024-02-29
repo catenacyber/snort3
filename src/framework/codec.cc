@@ -98,6 +98,7 @@ bool Codec::CheckIPV6HopOptions(const RawData& raw, CodecData& codec)
 
     const uint32_t total_octets = (exthdr->ip6e_len * 8) + 8;
     const uint8_t* hdr_end = pkt + total_octets;
+    const uint8_t* raw_end = pkt + raw.len;
     uint8_t oplen;
 
     if (raw.len < total_octets)
@@ -107,7 +108,7 @@ bool Codec::CheckIPV6HopOptions(const RawData& raw, CodecData& codec)
     pkt += 2;
 
     /* Iterate through the options, check for bad ones */
-    while (pkt < hdr_end)
+    while (pkt < hdr_end && pkt < raw_end)
     {
         const ip::HopByHopOptions type = static_cast<ip::HopByHopOptions>(*pkt);
         switch (type)
@@ -132,6 +133,9 @@ bool Codec::CheckIPV6HopOptions(const RawData& raw, CodecData& codec)
         case ip::HopByHopOptions::CALIPSO:
         case ip::HopByHopOptions::HOME_ADDRESS:
         case ip::HopByHopOptions::ENDPOINT_IDENT:
+            if (pkt + 1 >= raw_end) {
+                return false;
+            }
             oplen = *(++pkt);
             if ((pkt + oplen + 1) > hdr_end)
             {

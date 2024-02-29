@@ -249,7 +249,7 @@ bool Icmp4Codec::decode(const RawData& raw, CodecData& codec,DecodeData& snort)
         break;
     }
 
-    ICMP4MiscTests(icmph, codec, (uint16_t)raw.len - len);
+    ICMP4MiscTests(icmph, codec, (uint16_t)raw.len - len, raw.len);
 
     snort.set_pkt_type(PktType::ICMP);
     snort.icmph = icmph;
@@ -283,13 +283,15 @@ void Icmp4Codec::ICMP4AddrTests(const DecodeData& snort, const CodecData& codec)
 
 void Icmp4Codec::ICMP4MiscTests(const ICMPHdr* const icmph,
     const CodecData& codec,
-    const uint16_t dsize)
+    const uint16_t dsize,
+    const uint16_t rawlen)
 {
     if ((dsize == 0) &&
         (icmph->type == icmp::IcmpType::ECHO_4))
         codec_event(codec, DECODE_ICMP_PING_NMAP);
 
     if ((dsize == 0) &&
+        (rawlen >= 8) &&
         (icmph->s_icmp_seq == 666))
         codec_event(codec, DECODE_ICMP_ICMPENUM);
 
